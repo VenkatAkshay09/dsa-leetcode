@@ -17,9 +17,9 @@ class Solution {
                     resList.add(outputSet);
                     l++;
                     r--;
-                    while (l > i && l < r && nums[l] == nums[l - 1])
+                    while (l < r && nums[l] == nums[l - 1])
                         l++;
-                    while (r < nums.length - 1 && r > l && nums[r] == nums[r + 1])
+                    while (r > l && nums[r] == nums[r + 1])
                         r--;
                 } else if (nums[i] < -1 * (nums[l] + nums[r])) {
                     l++;
