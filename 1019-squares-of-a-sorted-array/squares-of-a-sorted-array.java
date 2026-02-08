@@ -1,41 +1,44 @@
 class Solution {
     public int[] sortedSquares(int[] nums) {
+        int l=0, r=0;
+        boolean found = false;
         int[] res = new int[nums.length];
-        int len = nums.length;
         int j=0;
-        for(int i=0; i<len; i++){
-            if(nums[i]<0){
-                nums[i] *= nums[i];
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]>=0){
+                l=i-1;
+                r=i;
+                found=true;
+                break;
+            }
+        }
+        if(!found){
+            l = nums.length - 1;
+            r = nums.length;
+        }
+        for(int k=0;k<nums.length;k++) nums[k]*=nums[k];
+        while(l>=0 && r<nums.length){
+            if(nums[l]<nums[r]){
+                res[j]=nums[l];
                 j++;
+                l--;
             }
-            else nums[i] *= nums[i];
-        }
-        int i= j-1;
-        int k=0;
-        while(i>=0 && j<len){
-            if(nums[i]<nums[j]){
-                res[k]=nums[i];
-                i--;
-                k++;
-            }
-            else {
-                res[k]=nums[j];
+            else{
+                res[j]=nums[r];
                 j++;
-                k++;
+                r++;
             }
-
         }
-        while(i>=0){
-            res[k]=nums[i];
-            i--;
-            k++;
-        }
-        while(j<len){
-            res[k]=nums[j];
+        while(l>=0){
+            res[j] = nums[l];
+            l--;
             j++;
-            k++;
+        }
+        while(r<nums.length){
+            res[j]= nums[r];
+            r++;
+            j++;
         }
         return res;
-        
     }
 }
